@@ -30,7 +30,7 @@
     --text:#ECEEE9; --text-2:#9CA29A; --text-3:#71766F;
     --border:rgba(255,255,255,.10); --border-2:rgba(255,255,255,.18);
     --solar:#F2A93B; --solar-soft:#3A2C13;
-    --battery:#1FB585; --battery-soft:#10322620;
+    --battery:#1FB585; --battery-soft:#103226;
     --grid-c:#9AA0AC; --grid-soft:#262B30;
     --info:#5C93F2; --info-soft:#13243f;
     --warn:#E2A24B; --warn-soft:#332512;
@@ -56,19 +56,11 @@
     }
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:"Inter",system-ui,sans-serif; font-size:16px; line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{margin:0; background:var(--bg); color:var(--text); font-family:"Inter",system-ui,sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
   .num{font-family:"Space Grotesk","Inter",sans-serif; font-feature-settings:"tnum" 1; letter-spacing:-.01em;}
   a{color:var(--info); text-decoration:none;}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px;}
-
-  header.topbar{
-    position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 86%,transparent);
-    backdrop-filter:saturate(1.1) blur(10px); border-bottom:1px solid var(--border);
-  }
+  header.topbar{position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 86%,transparent); backdrop-filter:saturate(1.1) blur(10px); border-bottom:1px solid var(--border);}
   .topbar .wrap{display:flex; align-items:center; gap:14px; height:62px;}
   .brand{display:flex; align-items:center; gap:10px; font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:19px; letter-spacing:-.02em;}
   .brand .mark{width:26px; height:26px; border-radius:8px; background:var(--solar); position:relative; flex:none;}
@@ -77,90 +69,65 @@
   .plant{margin-left:6px; color:var(--text-2); font-size:13px; display:flex; align-items:center; gap:5px;}
   .plant svg{width:14px;height:14px;}
   .spacer{flex:1;}
-  .status{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500;
-    color:var(--battery); background:var(--battery-soft); padding:6px 12px; border-radius:999px;}
-  .status .dot{width:8px;height:8px;border-radius:50%;background:var(--battery);}
-  .iconbtn{appearance:none; border:1px solid var(--border-2); background:var(--surface); color:var(--text-2);
-    width:38px;height:38px;border-radius:10px; cursor:pointer; display:grid; place-items:center;}
+  .status{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500; color:var(--battery); background:var(--battery-soft); padding:6px 12px; border-radius:999px;}
+  .status .dot{width:8px;height:8px;border-radius:50%;background:var(--battery); position:relative;}
+  .status.live .dot::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--battery); opacity:.5; animation:pulse 1.8s ease-out infinite;}
+  @keyframes pulse{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+  .status.demo{color:var(--warn); background:var(--warn-soft);} .status.demo .dot{background:var(--warn);}
+  .status.off{color:var(--danger); background:var(--danger-soft);} .status.off .dot{background:var(--danger);}
+  .iconbtn{appearance:none; border:1px solid var(--border-2); background:var(--surface); color:var(--text-2); width:38px;height:38px;border-radius:10px; cursor:pointer; display:grid; place-items:center;}
   .iconbtn:hover{color:var(--text); border-color:var(--text-3);}
   .iconbtn:focus-visible{outline:none; box-shadow:var(--ring);}
   .iconbtn svg{width:18px;height:18px;}
-
   .hero{padding:30px 0 8px;}
   .hello{color:var(--text-2); font-size:15px; margin:0 0 4px;}
   .hero-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:14px; margin-top:14px;}
   .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);}
-  .pad{padding:18px 20px;}
-  .lead{padding:22px 24px;}
+  .pad{padding:18px 20px;} .lead{padding:22px 24px;}
   .klabel{font-size:13px; color:var(--text-2); margin:0 0 6px; display:flex; align-items:center; gap:6px;}
   .kbig{font-family:"Space Grotesk",sans-serif; font-weight:500; font-size:40px; line-height:1; letter-spacing:-.025em;}
   .kbig small{font-size:18px; color:var(--text-2); font-weight:400; letter-spacing:0;}
-  .ksub{margin:10px 0 0; font-size:13px; color:var(--text-2);}
-  .ksub.up{color:var(--battery);}
+  .ksub{margin:10px 0 0; font-size:13px; color:var(--text-2);} .ksub.up{color:var(--battery);}
   .kmed{font-family:"Space Grotesk",sans-serif; font-weight:500; font-size:30px; line-height:1; letter-spacing:-.02em;}
   .kmed small{font-size:15px;color:var(--text-2);font-weight:400;letter-spacing:0;}
-
   section.block{margin-top:14px;}
   .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
   .grid-3{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
   .h{font-family:"Space Grotesk",sans-serif; font-size:15px; font-weight:500; margin:0; letter-spacing:-.01em;}
   .head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px;}
   .muted{color:var(--text-2); font-size:13px;}
-
   .flowsvg{width:100%; height:auto; display:block;}
   .flow-node-label{font-family:"Inter",sans-serif; font-size:12px;}
   .flow-node-val{font-family:"Space Grotesk",sans-serif; font-size:15px; font-weight:600;}
   .flow-line{fill:none; stroke-width:3; stroke-linecap:round; stroke-dasharray:2 11;}
   @keyframes flow{to{stroke-dashoffset:-26;}}
   .flow-line.anim{animation:flow 1.1s linear infinite;}
-
   .bstat{display:flex; justify-content:space-between; font-size:13px; color:var(--text-2); margin-top:14px;}
   .bar{height:9px; border-radius:999px; background:var(--surface-2); overflow:hidden; margin:14px 0 0;}
-  .bar > i{display:block; height:100%; background:var(--battery); border-radius:999px;}
-
+  .bar > i{display:block; height:100%; background:var(--battery); border-radius:999px; transition:width .6s ease;}
   .alert{display:flex; gap:11px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--border);}
   .alert:first-of-type{border-top:none;}
   .alert .pip{width:9px;height:9px;border-radius:50%; margin-top:7px; flex:none;}
-  .alert h4{margin:0; font-size:14px; font-weight:500;}
-  .alert p{margin:2px 0 0; font-size:13px; color:var(--text-2);}
-
+  .alert h4{margin:0; font-size:14px; font-weight:500;} .alert p{margin:2px 0 0; font-size:13px; color:var(--text-2);}
   .forecast-bars{display:flex; align-items:flex-end; gap:5px; height:70px; margin:6px 0 12px;}
   .forecast-bars > span{flex:1; border-radius:4px 4px 0 0; background:var(--info); opacity:.45;}
   .forecast-bars > span.peak{opacity:1; background:var(--solar);}
   .tip{font-size:13px; color:var(--battery); display:flex; align-items:center; gap:7px; margin:0;}
   .tip svg{width:16px;height:16px;flex:none;}
-
   .chartwrap{position:relative; width:100%; height:300px;}
-
   .field{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
   .field label{font-size:14px; color:var(--text-2); min-width:130px;}
-  input[type=text]{font:inherit; font-family:"Space Grotesk",sans-serif; width:90px; height:38px; padding:0 12px;
-    border:1px solid var(--border-2); border-radius:10px; background:var(--surface); color:var(--text);}
+  input[type=text]{font:inherit; font-family:"Space Grotesk",sans-serif; width:90px; height:38px; padding:0 12px; border:1px solid var(--border-2); border-radius:10px; background:var(--surface); color:var(--text);}
   input[type=text]:focus{outline:none; box-shadow:var(--ring); border-color:var(--info);}
   input[type=range]{flex:1; accent-color:var(--battery); height:24px;}
   .rngout{font-family:"Space Grotesk",sans-serif; font-weight:500; min-width:42px; text-align:right;}
-  .btn{appearance:none; font:inherit; font-size:14px; cursor:pointer; padding:9px 14px; border-radius:10px;
-    border:1px solid var(--border-2); background:var(--surface); color:var(--text);}
-  .btn:hover{background:var(--surface-2);}
-  .btn:focus-visible{outline:none; box-shadow:var(--ring);}
+  .btn{appearance:none; font:inherit; font-size:14px; cursor:pointer; padding:9px 14px; border-radius:10px; border:1px solid var(--border-2); background:var(--surface); color:var(--text);}
+  .btn:hover{background:var(--surface-2);} .btn:focus-visible{outline:none; box-shadow:var(--ring);}
   .btnrow{display:flex; gap:10px; flex-wrap:wrap;}
-
   footer{margin:40px 0 30px; color:var(--text-3); font-size:12px; text-align:center;}
-
-  @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr 1fr;}
-    .hero-grid .lead{grid-column:1 / -1;}
-    .grid-3{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:620px){
-    .grid-2{grid-template-columns:1fr;}
-    .plant{display:none;}
-    .kbig{font-size:34px;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .flow-line.anim{animation:none;}
-    *{scroll-behavior:auto;}
-  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr 1fr;} .hero-grid .lead{grid-column:1 / -1;} .grid-3{grid-template-columns:1fr 1fr;} }
+  @media (max-width:620px){ .grid-2{grid-template-columns:1fr;} .plant{display:none;} .kbig{font-size:34px;} }
+  @media (prefers-reduced-motion:reduce){ .flow-line.anim{animation:none;} .status.live .dot::after{animation:none;} *{scroll-behavior:auto;} }
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
 </style>
 </head>
@@ -171,7 +138,7 @@
     <div class="brand"><span class="mark" aria-hidden="true"></span> Solera</div>
     <span class="plant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> Casa Real · 6.0 kWp · 10 kWh</span>
     <span class="spacer"></span>
-    <span class="status"><span class="dot"></span> All systems normal</span>
+    <span class="status demo" id="status"><span class="dot"></span> <span id="status-text">Connecting…</span></span>
     <button class="iconbtn" id="theme" aria-label="Switch colour theme">
       <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg>
     </button>
@@ -179,9 +146,8 @@
 </header>
 
 <main class="wrap">
-
   <section class="hero">
-    <p class="hello">Good afternoon, Maria</p>
+    <p class="hello">Good afternoon, Joshy Antony</p>
     <div class="hero-grid">
       <div class="card lead">
         <p class="klabel">Saved today</p>
@@ -190,8 +156,8 @@
       </div>
       <div class="card pad">
         <p class="klabel">Self-sufficiency</p>
-        <div class="kmed num">82<small>%</small></div>
-        <p class="ksub">Grid covered just 18% today</p>
+        <div class="kmed num"><span id="self-suff">82</span><small>%</small></div>
+        <p class="ksub">Grid covered just <span id="grid-share">18</span>% today</p>
       </div>
       <div class="card pad">
         <p class="klabel">Payback</p>
@@ -204,37 +170,33 @@
   <section class="block">
     <div class="card pad">
       <div class="head"><h3 class="h">Live energy flow</h3><span class="muted" id="flow-updated">updated just now</span></div>
-      <svg class="flowsvg" viewBox="0 0 600 200" role="img" aria-label="Live energy flow: solar producing 3.4 kilowatts feeding the home at 1.2 kilowatts, charging the battery at 1.8 kilowatts, and exporting 0.4 kilowatts to the grid.">
+      <svg class="flowsvg" viewBox="0 0 600 200" role="img" aria-label="Live energy flow between solar, home, battery and grid.">
         <path class="flow-line anim" d="M120 100 H285" stroke="var(--solar)"></path>
         <path class="flow-line anim" d="M315 100 C 380 100, 400 56, 470 56" stroke="var(--battery)" style="animation-delay:.2s"></path>
         <path class="flow-line anim" d="M315 100 C 380 100, 400 144, 470 144" stroke="var(--grid-c)" style="animation-delay:.35s"></path>
-
         <g transform="translate(60,100)">
           <circle r="42" fill="var(--solar-soft)" stroke="var(--solar)" stroke-width="1.5"/>
           <g transform="translate(0,-12)" fill="none" stroke="var(--solar)" stroke-width="2.2"><circle r="6"/><path d="M0 -12V-15M0 12V15M-12 0H-15M12 0H15M-9 -9l-2-2M9 9l2 2M9 -9l2-2M-9 9l-2 2"/></g>
           <text class="flow-node-label" x="0" y="12" text-anchor="middle" fill="var(--text-2)">Solar</text>
-          <text class="flow-node-val num" x="0" y="29" text-anchor="middle" fill="var(--text)">3.4 kW</text>
+          <text id="kw-solar" class="flow-node-val num" x="0" y="29" text-anchor="middle" fill="var(--text)">3.4 kW</text>
         </g>
-
         <g transform="translate(300,100)">
           <rect x="-38" y="-38" width="76" height="76" rx="16" fill="var(--surface-2)" stroke="var(--border-2)" stroke-width="1.5"/>
           <path transform="translate(0,-12)" d="M-11 2 L0 -9 L11 2 M-8 0 V12 H8 V0" fill="none" stroke="var(--text-2)" stroke-width="2.2" stroke-linejoin="round"/>
           <text class="flow-node-label" x="0" y="12" text-anchor="middle" fill="var(--text-2)">Home</text>
-          <text class="flow-node-val num" x="0" y="29" text-anchor="middle" fill="var(--text)">1.2 kW</text>
+          <text id="kw-home" class="flow-node-val num" x="0" y="29" text-anchor="middle" fill="var(--text)">1.2 kW</text>
         </g>
-
         <g transform="translate(512,56)">
           <circle r="38" fill="var(--battery-soft)" stroke="var(--battery)" stroke-width="1.5"/>
           <g transform="translate(0,-10)" fill="none" stroke="var(--battery)" stroke-width="2.2"><rect x="-9" y="-6" width="18" height="12" rx="2"/><path d="M9 -2h2v4h-2"/></g>
           <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Battery</text>
-          <text class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--battery)">+1.8 kW</text>
+          <text id="kw-batt" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--battery)">+1.8 kW</text>
         </g>
-
         <g transform="translate(512,144)">
           <circle r="38" fill="var(--grid-soft)" stroke="var(--grid-c)" stroke-width="1.5"/>
           <path transform="translate(0,-10)" d="M2 -10 L-5 1 H1 L-2 10 L7 -2 H1 Z" fill="none" stroke="var(--grid-c)" stroke-width="2.2" stroke-linejoin="round"/>
           <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Grid</text>
-          <text class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--text)">0.4 kW</text>
+          <text id="kw-grid" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--text)">0.4 kW</text>
         </g>
       </svg>
     </div>
@@ -242,10 +204,10 @@
 
   <section class="block grid-2">
     <div class="card pad">
-      <div class="head"><h3 class="h">Battery</h3><span class="muted">charging</span></div>
-      <div class="kmed num">74<small>% · ~6h 10m backup</small></div>
-      <div class="bar"><i style="width:74%"></i></div>
-      <div class="bstat"><span>Health 97%</span><span>312 cycles</span><span>Reserve <span id="reserve-echo">20</span>%</span></div>
+      <div class="head"><h3 class="h">Battery</h3><span class="muted" id="batt-mode">charging</span></div>
+      <div class="kmed num"><span id="batt-soc">74</span><small>% · <span id="batt-backup">~6h 10m</span> backup</small></div>
+      <div class="bar"><i id="batt-bar" style="width:74%"></i></div>
+      <div class="bstat"><span>Health <span id="batt-health">97</span>%</span><span><span id="batt-cycles">312</span> cycles</span><span>Reserve <span id="reserve-echo">20</span>%</span></div>
     </div>
     <div class="card pad">
       <div class="head"><h3 class="h">Alerts</h3><span class="muted">2 active</span></div>
@@ -270,40 +232,25 @@
     <div class="card pad">
       <div class="head"><h3 class="h">Daily generation · last 30 days</h3><span class="muted">6.0 kWp</span></div>
       <div class="grid-3" style="margin-bottom:18px">
-        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Total</p><div class="kmed num">757 <small>kWh</small></div></div></div>
-        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Daily average</p><div class="kmed num">25.2 <small>kWh</small></div></div></div>
-        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Best day</p><div class="kmed num">31.5 <small>kWh</small></div></div></div>
+        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Total</p><div class="kmed num"><span id="gen-total">757</span> <small>kWh</small></div></div></div>
+        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Daily average</p><div class="kmed num"><span id="gen-avg">25.2</span> <small>kWh</small></div></div></div>
+        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Best day</p><div class="kmed num"><span id="gen-best">31.5</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Est. value</p><div class="kmed num">$<span id="gen-value">2,157</span> <small>MXN</small></div></div></div>
       </div>
-      <div class="chartwrap">
-        <canvas id="genChart" role="img" aria-label="Bar chart of daily solar generation over 30 days, ranging from about 10 kWh on cloudy days to 31.5 kWh, averaging 25.2 kWh.">Daily generation in kWh, mostly 26 to 31 on clear days with dips to 10 to 18 on cloudy days.</canvas>
-      </div>
+      <div class="chartwrap"><canvas id="genChart" role="img" aria-label="Bar chart of daily solar generation over 30 days.">Daily generation in kWh.</canvas></div>
     </div>
   </section>
 
   <section class="block">
     <div class="card pad">
       <div class="head"><h3 class="h">Your settings</h3></div>
-      <div class="field">
-        <label for="tariff">Electricity tariff</label>
-        <input type="text" id="tariff" value="2.85" inputmode="decimal" />
-        <span class="muted">MXN / kWh</span>
-      </div>
-      <div class="field">
-        <label for="reserve">Battery reserve</label>
-        <input type="range" id="reserve" min="10" max="50" value="20" step="5" />
-        <span class="rngout num" id="reserve-out">20%</span>
-      </div>
-      <div class="btnrow">
-        <button class="btn" type="button">Smart scheduling</button>
-        <button class="btn" type="button">Winter mode</button>
-        <button class="btn" type="button">Download report</button>
-      </div>
+      <div class="field"><label for="tariff">Electricity tariff</label><input type="text" id="tariff" value="2.85" inputmode="decimal" /><span class="muted">MXN / kWh</span></div>
+      <div class="field"><label for="reserve">Battery reserve</label><input type="range" id="reserve" min="10" max="50" value="20" step="5" /><span class="rngout num" id="reserve-out">20%</span></div>
+      <div class="btnrow"><button class="btn" type="button">Smart scheduling</button><button class="btn" type="button">Winter mode</button><button class="btn" type="button">Download report</button></div>
     </div>
   </section>
 
-  <footer>Solera demo dashboard · sample data · built as a static site, ready to wire to a live monitoring API.</footer>
-
+  <footer id="footnote">Solera · running in demo mode with simulated data. Set a data endpoint to go live.</footer>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -311,73 +258,161 @@
 (function(){
   "use strict";
 
-  /* ---- Sample plant data. Swap this object for your monitoring API. ---- */
-  var plant = {
-    tariff: 2.85,
-    daily: [28.4,30.1,29.6,14.2,9.8,22.5,27.9,31.0,30.4,28.8,26.1,18.7,12.3,24.6,29.2,
-            30.8,31.5,29.0,27.3,15.9,11.4,23.8,28.6,30.2,29.9,26.7,20.4,28.1,30.6,29.3]
-  };
+  /* =====================================================================
+     CONFIG — to go live, paste your backend proxy URL between the quotes.
+     Leave it empty ("") to keep running the simulated demo.
+     The endpoint must return JSON in the shape shown in readState() below.
+  ===================================================================== */
+  var DATA_ENDPOINT = "";        // e.g. "https://solera-proxy.yourname.workers.dev/data"
+  var POLL_MS       = 10000;     // how often to refresh (10s)
 
   var fmt = new Intl.NumberFormat('en-US');
+  var $ = function(id){ return document.getElementById(id); };
 
-  /* ---- Theme toggle (light / dark), persisted when storage is available ---- */
+  /* ---- Theme toggle, persisted when storage is available ---- */
   var root = document.documentElement;
   function applyTheme(t){ root.setAttribute('data-theme', t); }
-  function storedTheme(){ try { return localStorage.getItem('solera-theme'); } catch(e){ return null; } }
-  function storeTheme(t){ try { localStorage.setItem('solera-theme', t); } catch(e){} }
-  var saved = storedTheme();
-  if (saved) applyTheme(saved);
-  document.getElementById('theme').addEventListener('click', function(){
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var current = root.getAttribute('data-theme');
-    if (current === 'auto') current = prefersDark ? 'dark' : 'light';
-    var next = current === 'dark' ? 'light' : 'dark';
-    applyTheme(next); storeTheme(next); buildChart();
+  try { var s = localStorage.getItem('solera-theme'); if (s) applyTheme(s); } catch(e){}
+  $('theme').addEventListener('click', function(){
+    var prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+    var cur = root.getAttribute('data-theme');
+    if (cur === 'auto') cur = prefersDark ? 'dark' : 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    applyTheme(next); try{ localStorage.setItem('solera-theme', next); }catch(e){}
+    buildChart();
   });
 
-  /* ---- Settings: tariff recomputes generation value; reserve echoes live ---- */
-  var totalKwh = plant.daily.reduce(function(a,b){return a+b;}, 0);
-  var tariffEl = document.getElementById('tariff');
-  function recalcValue(){
+  /* ---- Current state (seeded with the demo values) ---- */
+  var demoDaily = [28.4,30.1,29.6,14.2,9.8,22.5,27.9,31.0,30.4,28.8,26.1,18.7,12.3,24.6,29.2,
+                   30.8,31.5,29.0,27.3,15.9,11.4,23.8,28.6,30.2,29.9,26.7,20.4,28.1,30.6,29.3];
+  var state = {
+    solarKw:3.4, homeKw:1.2, batteryKw:1.8, gridKw:0.4,
+    soc:74, batteryHealth:97, cycles:312, backup:"~6h 10m",
+    savedToday:38, savedMonth:1140, selfSufficiency:82,
+    daily:demoDaily.slice(), tariff:2.85, lastUpdate:Date.now()
+  };
+
+  /* ---- Settings inputs ---- */
+  var tariffEl = $('tariff');
+  tariffEl.addEventListener('input', function(){
     var t = parseFloat(tariffEl.value);
-    if (isNaN(t) || t < 0) return;
-    document.getElementById('gen-value').textContent = fmt.format(Math.round(totalKwh * t));
-  }
-  tariffEl.addEventListener('input', recalcValue);
-
-  var reserve = document.getElementById('reserve');
-  function recalcReserve(){
+    if (!isNaN(t) && t >= 0){ state.tariff = t; renderGeneration(); }
+  });
+  var reserve = $('reserve');
+  reserve.addEventListener('input', function(){
     var v = Math.round(reserve.value);
-    document.getElementById('reserve-out').textContent = v + '%';
-    document.getElementById('reserve-echo').textContent = v;
-  }
-  reserve.addEventListener('input', recalcReserve);
+    $('reserve-out').textContent = v + '%';
+    $('reserve-echo').textContent = v;
+  });
 
-  /* ---- Daily generation chart ---- */
+  /* ---- Chart ---- */
   var chart = null;
-  function cssVar(name){ return getComputedStyle(root).getPropertyValue(name).trim(); }
+  function cssVar(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
   function buildChart(){
-    var ctx = document.getElementById('genChart');
+    var ctx = $('genChart');
     if (!window.Chart || !ctx) return;
     if (chart) chart.destroy();
-    var labels = plant.daily.map(function(_, i){ return 'May ' + (i+1); });
     chart = new Chart(ctx, {
       type:'bar',
-      data:{ labels:labels, datasets:[{ data:plant.daily, backgroundColor: cssVar('--solar'), borderRadius:3, maxBarThickness:18 }] },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.parsed.y.toFixed(1) + ' kWh'; } } } },
-        scales:{
-          x:{ grid:{display:false}, ticks:{ autoSkip:true, maxRotation:0, color:cssVar('--chart-tick'), font:{size:11} } },
-          y:{ beginAtZero:true, grid:{ color:cssVar('--chart-grid') }, ticks:{ color:cssVar('--chart-tick'), font:{size:11}, callback:function(v){ return v + ' kWh'; } } }
-        }
-      }
+      data:{ labels: state.daily.map(function(_,i){ return 'Day ' + (i+1); }),
+             datasets:[{ data: state.daily, backgroundColor: cssVar('--solar'), borderRadius:3, maxBarThickness:18 }] },
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.parsed.y.toFixed(1)+' kWh'; } } } },
+        scales:{ x:{ grid:{display:false}, ticks:{ autoSkip:true, maxRotation:0, color:cssVar('--chart-tick'), font:{size:11} } },
+                 y:{ beginAtZero:true, grid:{ color:cssVar('--chart-grid') }, ticks:{ color:cssVar('--chart-tick'), font:{size:11}, callback:function(v){ return v+' kWh'; } } } } }
     });
   }
 
-  recalcValue();
-  recalcReserve();
+  /* ---- Render everything from state ---- */
+  function kw(v){ return (v>=0?'':'') + v.toFixed(1) + ' kW'; }
+  function renderGeneration(){
+    var total = state.daily.reduce(function(a,b){return a+b;},0);
+    var best = Math.max.apply(null, state.daily);
+    $('gen-total').textContent = Math.round(total);
+    $('gen-avg').textContent   = (total/state.daily.length).toFixed(1);
+    $('gen-best').textContent  = best.toFixed(1);
+    $('gen-value').textContent = fmt.format(Math.round(total * state.tariff));
+  }
+  function render(){
+    $('kw-solar').textContent = state.solarKw.toFixed(1)+' kW';
+    $('kw-home').textContent  = state.homeKw.toFixed(1)+' kW';
+    $('kw-batt').textContent  = (state.batteryKw>=0?'+':'') + state.batteryKw.toFixed(1)+' kW';
+    $('kw-grid').textContent  = Math.abs(state.gridKw).toFixed(1)+' kW';
+    $('batt-soc').textContent = Math.round(state.soc);
+    $('batt-bar').style.width = Math.round(state.soc)+'%';
+    $('batt-backup').textContent = state.backup;
+    $('batt-health').textContent = Math.round(state.batteryHealth);
+    $('batt-cycles').textContent = state.cycles;
+    $('batt-mode').textContent = state.batteryKw >= 0 ? 'charging' : 'discharging';
+    $('saved-today').textContent = fmt.format(Math.round(state.savedToday));
+    $('saved-month').textContent = fmt.format(Math.round(state.savedMonth));
+    $('self-suff').textContent = Math.round(state.selfSufficiency);
+    $('grid-share').textContent = Math.max(0, 100 - Math.round(state.selfSufficiency));
+    renderGeneration();
+    var secs = Math.max(0, Math.round((Date.now() - state.lastUpdate)/1000));
+    $('flow-updated').textContent = secs < 5 ? 'updated just now' : 'updated ' + secs + 's ago';
+  }
+
+  function setStatus(mode){
+    var el = $('status'); el.className = 'status ' + mode;
+    $('status-text').textContent = mode==='live' ? 'Live' : mode==='off' ? 'Reconnecting…' : 'Demo · simulated';
+  }
+
+  /* ---- Map the backend JSON into state. Adjust keys to match your proxy. ---- */
+  function readState(json){
+    if (typeof json.solarKw==='number')        state.solarKw = json.solarKw;
+    if (typeof json.homeKw==='number')          state.homeKw = json.homeKw;
+    if (typeof json.batteryKw==='number')     state.batteryKw = json.batteryKw;
+    if (typeof json.gridKw==='number')            state.gridKw = json.gridKw;
+    if (typeof json.soc==='number')                  state.soc = json.soc;
+    if (typeof json.batteryHealth==='number') state.batteryHealth = json.batteryHealth;
+    if (typeof json.cycles==='number')            state.cycles = json.cycles;
+    if (typeof json.backup==='string')            state.backup = json.backup;
+    if (typeof json.savedToday==='number')    state.savedToday = json.savedToday;
+    if (typeof json.savedMonth==='number')    state.savedMonth = json.savedMonth;
+    if (typeof json.selfSufficiency==='number') state.selfSufficiency = json.selfSufficiency;
+    if (Array.isArray(json.daily) && json.daily.length) state.daily = json.daily;
+    state.lastUpdate = Date.now();
+  }
+
+  /* ---- Demo tick: gently move the numbers so "live" is visible ---- */
+  function demoTick(){
+    var t = Date.now()/1000;
+    state.solarKw = Math.max(0, 3 + Math.sin(t/30)*1.4 + (Math.random()-0.5)*0.3);
+    state.homeKw  = Math.max(0.3, 1.2 + Math.sin(t/17)*0.5 + (Math.random()-0.5)*0.2);
+    var spare = state.solarKw - state.homeKw;
+    if (state.soc < 99 && spare > 0){ state.batteryKw = Math.min(spare*0.8, 2.5); state.soc = Math.min(100, state.soc + 0.05); }
+    else { state.batteryKw = -Math.min(state.homeKw*0.6, 1.5); state.soc = Math.max(state.soc - 0.04, 5); }
+    state.gridKw = spare - Math.max(state.batteryKw,0);
+    state.savedToday += 0.4 + Math.random()*0.3;
+    state.savedMonth += 0.4 + Math.random()*0.3;
+    state.selfSufficiency = 80 + Math.sin(t/40)*5;
+    state.lastUpdate = Date.now();
+    render();
+  }
+
+  /* ---- Live tick: fetch from the proxy ---- */
+  function liveTick(){
+    fetch(DATA_ENDPOINT, { cache:'no-store' })
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(j){ readState(j); render(); buildChart(); setStatus('live'); })
+      .catch(function(){ setStatus('off'); });
+  }
+
+  /* ---- Boot ---- */
   buildChart();
+  render();
+  if (DATA_ENDPOINT){
+    setStatus('off');
+    liveTick();
+    setInterval(liveTick, POLL_MS);
+  } else {
+    setStatus('demo');
+    $('footnote').textContent = 'Solera · demo mode with simulated data, refreshing every few seconds. Set DATA_ENDPOINT in the code to show your real system.';
+    demoTick();
+    setInterval(demoTick, 3000);
+    setInterval(function(){ render(); }, 1000);
+  }
 })();
 </script>
 </body>
