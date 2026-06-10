@@ -150,19 +150,19 @@
     <p class="hello">Good afternoon, Joshy Antony</p>
     <div class="hero-grid">
       <div class="card lead">
-        <p class="klabel">Saved today</p>
-        <div class="kbig num">₹<span id="saved-today">0</span> <small>INR</small></div>
-        <p class="ksub up">▲ ₹<span id="saved-month">0</span> saved this month</p>
+        <p class="klabel">Units banked</p>
+        <div class="kbig num"><span id="banked">0</span> <small>kWh</small></div>
+        <p class="ksub up">▲ credit with KSEB · <span id="bill-month">—</span></p>
       </div>
       <div class="card pad">
-        <p class="klabel">Generated today</p>
-        <div class="kmed num"><span id="self-suff">0</span><small> kWh</small></div>
-        <p class="ksub"><span id="grid-share">0</span> kWh this month</p>
+        <p class="klabel">Exported this month</p>
+        <div class="kmed num"><span id="exported">0</span><small> kWh</small></div>
+        <p class="ksub">sent to the grid</p>
       </div>
       <div class="card pad">
-        <p class="klabel">Payback</p>
-        <div class="kmed num">3.1 <small>yrs left</small></div>
-        <p class="ksub">61% of cost recovered</p>
+        <p class="klabel">Imported this month</p>
+        <div class="kmed num"><span id="imported">0</span><small> kWh</small></div>
+        <p class="ksub">bill: ₹<span id="bill-amount">0</span></p>
       </div>
     </div>
   </section>
@@ -287,6 +287,7 @@
   var state = {
     solarKw:0, eToday:0, eMonth:0, eTotal:0, nominalKw:8,
     savedToday:0, savedMonth:0,
+    bankedUnits:0, exported:0, imported:0, billAmount:0, billMonth:"",
     daily:demoDaily.slice(), tariff:6.50, lastUpdate:Date.now()
   };
 
@@ -352,10 +353,13 @@
     if ($('batt-health'))$('batt-health').textContent = Math.round(state.eMonth);
     if ($('batt-cycles'))$('batt-cycles').textContent = Math.round(state.eTotal);
     if ($('batt-mode'))  $('batt-mode').textContent = state.solarKw > 0.05 ? 'generating' : 'idle';
-    $('saved-today').textContent = fmt.format(Math.round(state.savedToday));
-    $('saved-month').textContent = fmt.format(Math.round(state.savedMonth));
-    if ($('self-suff'))  $('self-suff').textContent = state.eToday.toFixed(1);
-    if ($('grid-share')) $('grid-share').textContent = Math.round(state.eMonth);
+    if ($('banked'))     $('banked').textContent = fmt.format(Math.round(state.bankedUnits));
+    if ($('exported'))   $('exported').textContent = fmt.format(Math.round(state.exported));
+    if ($('imported'))   $('imported').textContent = fmt.format(Math.round(state.imported));
+    if ($('bill-amount'))$('bill-amount').textContent = fmt.format(Math.round(state.billAmount));
+    if ($('bill-month')) $('bill-month').textContent = state.billMonth || '—';
+    if ($('saved-today'))$('saved-today').textContent = fmt.format(Math.round(state.savedToday));
+    if ($('saved-month'))$('saved-month').textContent = fmt.format(Math.round(state.savedMonth));
     renderGeneration();
     var secs = Math.max(0, Math.round((Date.now() - state.lastUpdate)/1000));
     $('flow-updated').textContent = secs < 5 ? 'updated just now' : 'updated ' + secs + 's ago';
@@ -375,6 +379,11 @@
     if (typeof json.savedToday==='number') state.savedToday = json.savedToday;
     if (typeof json.savedMonth==='number') state.savedMonth = json.savedMonth;
     if (typeof json.nominalKw==='number' && json.nominalKw>0) state.nominalKw = json.nominalKw;
+    if (typeof json.bankedUnits==='number') state.bankedUnits = json.bankedUnits;
+    if (typeof json.exported==='number')     state.exported = json.exported;
+    if (typeof json.imported==='number')     state.imported = json.imported;
+    if (typeof json.billAmount==='number')   state.billAmount = json.billAmount;
+    if (typeof json.billMonth==='string')     state.billMonth = json.billMonth;
     if (Array.isArray(json.daily) && json.daily.length) state.daily = json.daily;
     state.lastUpdate = Date.now();
   }
