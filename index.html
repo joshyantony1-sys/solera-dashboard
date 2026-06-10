@@ -150,18 +150,18 @@
     <p class="hello">Good afternoon, Joshy Antony</p>
     <div class="hero-grid">
       <div class="card lead">
+        <p class="klabel">Value of solar this month</p>
+        <div class="kbig num">₹<span id="value-month">0</span></div>
+        <p class="ksub up">▲ at ₹<span id="rate-label">3.15</span>/kWh · ₹<span id="value-total">0</span> lifetime</p>
+      </div>
+      <div class="card pad">
         <p class="klabel">Units banked</p>
-        <div class="kbig num"><span id="banked">0</span> <small>kWh</small></div>
-        <p class="ksub up">▲ credit with KSEB · <span id="bill-month">—</span></p>
+        <div class="kmed num"><span id="banked">0</span><small> kWh</small></div>
+        <p class="ksub">credit · <span id="bill-month">—</span></p>
       </div>
       <div class="card pad">
         <p class="klabel">Exported this month</p>
         <div class="kmed num"><span id="exported">0</span><small> kWh</small></div>
-        <p class="ksub">sent to the grid</p>
-      </div>
-      <div class="card pad">
-        <p class="klabel">Imported this month</p>
-        <div class="kmed num"><span id="imported">0</span><small> kWh</small></div>
         <p class="ksub">bill: ₹<span id="bill-amount">0</span></p>
       </div>
     </div>
@@ -235,7 +235,7 @@
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Total</p><div class="kmed num"><span id="gen-total">757</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Daily average</p><div class="kmed num"><span id="gen-avg">25.2</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Best day</p><div class="kmed num"><span id="gen-best">31.5</span> <small>kWh</small></div></div></div>
-        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Est. value</p><div class="kmed num">₹<span id="gen-value">0</span> <small>INR</small></div></div></div>
+        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Month value</p><div class="kmed num">₹<span id="gen-value">0</span></div></div></div>
       </div>
       <div class="chartwrap"><canvas id="genChart" role="img" aria-label="Bar chart of daily solar generation over 30 days.">Daily generation in kWh.</canvas></div>
     </div>
@@ -292,9 +292,9 @@
 
   /* ---- Settings inputs ---- */
   var tariffEl = $('tariff');
-  tariffEl.addEventListener('input', function(){
+  if (tariffEl) tariffEl.addEventListener('input', function(){
     var t = parseFloat(tariffEl.value);
-    if (!isNaN(t) && t >= 0){ state.tariff = t; renderGeneration(); }
+    if (!isNaN(t) && t >= 0){ state.tariff = t; render(); }
   });
   var reserve = $('reserve');
   if (reserve) reserve.addEventListener('input', function(){
@@ -357,6 +357,9 @@
     if ($('imported'))   $('imported').textContent = fmt.format(Math.round(state.imported));
     if ($('bill-amount'))$('bill-amount').textContent = fmt.format(Math.round(state.billAmount));
     if ($('bill-month')) $('bill-month').textContent = state.billMonth || '—';
+    if ($('value-month'))$('value-month').textContent = fmt.format(Math.round(state.eMonth * state.tariff));
+    if ($('value-total'))$('value-total').textContent = fmt.format(Math.round(state.eTotal * state.tariff));
+    if ($('rate-label')) $('rate-label').textContent = state.tariff.toFixed(2);
     if ($('saved-today'))$('saved-today').textContent = fmt.format(Math.round(state.savedToday));
     if ($('saved-month'))$('saved-month').textContent = fmt.format(Math.round(state.savedMonth));
     renderGeneration();
