@@ -136,7 +136,7 @@
 <header class="topbar">
   <div class="wrap">
     <div class="brand"><span class="mark" aria-hidden="true"></span> Solera</div>
-    <span class="plant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> Casa Real · 6.0 kWp · 10 kWh</span>
+    <span class="plant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> JoshyAntony · 8.0 kW · MOD 8000TL3-X</span>
     <span class="spacer"></span>
     <span class="status demo" id="status"><span class="dot"></span> <span id="status-text">Connecting…</span></span>
     <button class="iconbtn" id="theme" aria-label="Switch colour theme">
@@ -151,13 +151,13 @@
     <div class="hero-grid">
       <div class="card lead">
         <p class="klabel">Saved today</p>
-        <div class="kbig num">$<span id="saved-today">38</span> <small>MXN</small></div>
-        <p class="ksub up">▲ $<span id="saved-month">1,140</span> saved this month</p>
+        <div class="kbig num">₹<span id="saved-today">0</span> <small>INR</small></div>
+        <p class="ksub up">▲ ₹<span id="saved-month">0</span> saved this month</p>
       </div>
       <div class="card pad">
-        <p class="klabel">Self-sufficiency</p>
-        <div class="kmed num"><span id="self-suff">82</span><small>%</small></div>
-        <p class="ksub">Grid covered just <span id="grid-share">18</span>% today</p>
+        <p class="klabel">Generated today</p>
+        <div class="kmed num"><span id="self-suff">0</span><small> kWh</small></div>
+        <p class="ksub"><span id="grid-share">0</span> kWh this month</p>
       </div>
       <div class="card pad">
         <p class="klabel">Payback</p>
@@ -187,16 +187,16 @@
           <text id="kw-home" class="flow-node-val num" x="0" y="29" text-anchor="middle" fill="var(--text)">1.2 kW</text>
         </g>
         <g transform="translate(512,56)">
-          <circle r="38" fill="var(--battery-soft)" stroke="var(--battery)" stroke-width="1.5"/>
-          <g transform="translate(0,-10)" fill="none" stroke="var(--battery)" stroke-width="2.2"><rect x="-9" y="-6" width="18" height="12" rx="2"/><path d="M9 -2h2v4h-2"/></g>
-          <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Battery</text>
-          <text id="kw-batt" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--battery)">+1.8 kW</text>
+          <circle r="38" fill="var(--solar-soft)" stroke="var(--solar)" stroke-width="1.5"/>
+          <g transform="translate(0,-10)" fill="none" stroke="var(--solar)" stroke-width="2.2"><path d="M0 -8 V8 M-6 2 L0 8 L6 2"/></g>
+          <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Today</text>
+          <text id="kw-batt" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--solar)">0 kWh</text>
         </g>
         <g transform="translate(512,144)">
           <circle r="38" fill="var(--grid-soft)" stroke="var(--grid-c)" stroke-width="1.5"/>
-          <path transform="translate(0,-10)" d="M2 -10 L-5 1 H1 L-2 10 L7 -2 H1 Z" fill="none" stroke="var(--grid-c)" stroke-width="2.2" stroke-linejoin="round"/>
-          <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Grid</text>
-          <text id="kw-grid" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--text)">0.4 kW</text>
+          <g transform="translate(0,-10)" fill="none" stroke="var(--grid-c)" stroke-width="2.2"><circle r="7"/><path d="M0 -10v2M0 8v2M-10 0h2M8 0h2"/></g>
+          <text class="flow-node-label" x="0" y="11" text-anchor="middle" fill="var(--text-2)">Lifetime</text>
+          <text id="kw-grid" class="flow-node-val num" x="0" y="27" text-anchor="middle" fill="var(--text)">0 kWh</text>
         </g>
       </svg>
     </div>
@@ -204,15 +204,15 @@
 
   <section class="block grid-2">
     <div class="card pad">
-      <div class="head"><h3 class="h">Battery</h3><span class="muted" id="batt-mode">charging</span></div>
-      <div class="kmed num"><span id="batt-soc">74</span><small>% · <span id="batt-backup">~6h 10m</span> backup</small></div>
-      <div class="bar"><i id="batt-bar" style="width:74%"></i></div>
-      <div class="bstat"><span>Health <span id="batt-health">97</span>%</span><span><span id="batt-cycles">312</span> cycles</span><span>Reserve <span id="reserve-echo">20</span>%</span></div>
+      <div class="head"><h3 class="h">Today</h3><span class="muted" id="batt-mode">generating</span></div>
+      <div class="kmed num"><span id="batt-soc">0</span><small> kWh · <span id="batt-backup">0 kW</span> now</small></div>
+      <div class="bar"><i id="batt-bar" style="width:0%"></i></div>
+      <div class="bstat"><span>This month <span id="batt-health">0</span> kWh</span><span>Lifetime <span id="batt-cycles">0</span> kWh</span></div>
     </div>
     <div class="card pad">
-      <div class="head"><h3 class="h">Alerts</h3><span class="muted">2 active</span></div>
-      <div class="alert"><span class="pip" style="background:var(--warn)"></span><div><h4>Grid-code mismatch on inverter</h4><p>Verify the model matches your local grid — review</p></div></div>
-      <div class="alert"><span class="pip" style="background:var(--info)"></span><div><h4>Firmware update available</h4><p>About 1h; generation pauses during install</p></div></div>
+      <div class="head"><h3 class="h">System</h3><span class="muted">MOD 8000TL3-X</span></div>
+      <div class="alert"><span class="pip" style="background:var(--battery)"></span><div><h4>Inverter online</h4><p>Reporting normally via ShineWiFi-X · Thrikkodithanam</p></div></div>
+      <div class="alert"><span class="pip" style="background:var(--info)"></span><div><h4>8.0 kW three-phase string inverter</h4><p>PV-only system (no battery installed)</p></div></div>
     </div>
   </section>
 
@@ -230,12 +230,12 @@
 
   <section class="block">
     <div class="card pad">
-      <div class="head"><h3 class="h">Daily generation · last 30 days</h3><span class="muted">6.0 kWp</span></div>
+      <div class="head"><h3 class="h">Daily generation · this month</h3><span class="muted">6.0 kWp</span></div>
       <div class="grid-3" style="margin-bottom:18px">
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Total</p><div class="kmed num"><span id="gen-total">757</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Daily average</p><div class="kmed num"><span id="gen-avg">25.2</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Best day</p><div class="kmed num"><span id="gen-best">31.5</span> <small>kWh</small></div></div></div>
-        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Est. value</p><div class="kmed num">$<span id="gen-value">2,157</span> <small>MXN</small></div></div></div>
+        <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Est. value</p><div class="kmed num">₹<span id="gen-value">0</span> <small>INR</small></div></div></div>
       </div>
       <div class="chartwrap"><canvas id="genChart" role="img" aria-label="Bar chart of daily solar generation over 30 days.">Daily generation in kWh.</canvas></div>
     </div>
@@ -244,7 +244,7 @@
   <section class="block">
     <div class="card pad">
       <div class="head"><h3 class="h">Your settings</h3></div>
-      <div class="field"><label for="tariff">Electricity tariff</label><input type="text" id="tariff" value="2.85" inputmode="decimal" /><span class="muted">MXN / kWh</span></div>
+      <div class="field"><label for="tariff">Electricity tariff</label><input type="text" id="tariff" value="6.50" inputmode="decimal" /><span class="muted">INR / kWh</span></div>
       <div class="field"><label for="reserve">Battery reserve</label><input type="range" id="reserve" min="10" max="50" value="20" step="5" /><span class="rngout num" id="reserve-out">20%</span></div>
       <div class="btnrow"><button class="btn" type="button">Smart scheduling</button><button class="btn" type="button">Winter mode</button><button class="btn" type="button">Download report</button></div>
     </div>
@@ -263,8 +263,8 @@
      Leave it empty ("") to keep running the simulated demo.
      The endpoint must return JSON in the shape shown in readState() below.
   ===================================================================== */
-  var DATA_ENDPOINT = "";        // e.g. "https://solera-proxy.yourname.workers.dev/data"
-  var POLL_MS       = 10000;     // how often to refresh (10s)
+  var DATA_ENDPOINT = "https://solera-proxy.trial7706.workers.dev/data";   // live Growatt feed via proxy
+  var POLL_MS       = 120000;    // refresh every 2 minutes (gentle on Growatt)
 
   var fmt = new Intl.NumberFormat('en-US');
   var $ = function(id){ return document.getElementById(id); };
@@ -283,13 +283,11 @@
   });
 
   /* ---- Current state (seeded with the demo values) ---- */
-  var demoDaily = [28.4,30.1,29.6,14.2,9.8,22.5,27.9,31.0,30.4,28.8,26.1,18.7,12.3,24.6,29.2,
-                   30.8,31.5,29.0,27.3,15.9,11.4,23.8,28.6,30.2,29.9,26.7,20.4,28.1,30.6,29.3];
+  var demoDaily = [];
   var state = {
-    solarKw:3.4, homeKw:1.2, batteryKw:1.8, gridKw:0.4,
-    soc:74, batteryHealth:97, cycles:312, backup:"~6h 10m",
-    savedToday:38, savedMonth:1140, selfSufficiency:82,
-    daily:demoDaily.slice(), tariff:2.85, lastUpdate:Date.now()
+    solarKw:0, eToday:0, eMonth:0, eTotal:0, nominalKw:8,
+    savedToday:0, savedMonth:0,
+    daily:demoDaily.slice(), tariff:6.50, lastUpdate:Date.now()
   };
 
   /* ---- Settings inputs ---- */
@@ -299,10 +297,10 @@
     if (!isNaN(t) && t >= 0){ state.tariff = t; renderGeneration(); }
   });
   var reserve = $('reserve');
-  reserve.addEventListener('input', function(){
+  if (reserve) reserve.addEventListener('input', function(){
     var v = Math.round(reserve.value);
-    $('reserve-out').textContent = v + '%';
-    $('reserve-echo').textContent = v;
+    if ($('reserve-out')) $('reserve-out').textContent = v + '%';
+    if ($('reserve-echo')) $('reserve-echo').textContent = v;
   });
 
   /* ---- Chart ---- */
@@ -326,28 +324,38 @@
   /* ---- Render everything from state ---- */
   function kw(v){ return (v>=0?'':'') + v.toFixed(1) + ' kW'; }
   function renderGeneration(){
-    var total = state.daily.reduce(function(a,b){return a+b;},0);
-    var best = Math.max.apply(null, state.daily);
+    var d = state.daily || [];
+    if (!d.length){
+      $('gen-total').textContent = Math.round(state.eMonth || 0);
+      $('gen-avg').textContent   = '—';
+      $('gen-best').textContent  = '—';
+      $('gen-value').textContent = fmt.format(Math.round((state.eMonth||0) * state.tariff));
+      return;
+    }
+    var total = d.reduce(function(a,b){return a+b;},0);
+    var best = Math.max.apply(null, d);
     $('gen-total').textContent = Math.round(total);
-    $('gen-avg').textContent   = (total/state.daily.length).toFixed(1);
+    $('gen-avg').textContent   = (total/d.length).toFixed(1);
     $('gen-best').textContent  = best.toFixed(1);
     $('gen-value').textContent = fmt.format(Math.round(total * state.tariff));
   }
   function render(){
-    $('kw-solar').textContent = state.solarKw.toFixed(1)+' kW';
-    $('kw-home').textContent  = state.homeKw.toFixed(1)+' kW';
-    $('kw-batt').textContent  = (state.batteryKw>=0?'+':'') + state.batteryKw.toFixed(1)+' kW';
-    $('kw-grid').textContent  = Math.abs(state.gridKw).toFixed(1)+' kW';
-    $('batt-soc').textContent = Math.round(state.soc);
-    $('batt-bar').style.width = Math.round(state.soc)+'%';
-    $('batt-backup').textContent = state.backup;
-    $('batt-health').textContent = Math.round(state.batteryHealth);
-    $('batt-cycles').textContent = state.cycles;
-    $('batt-mode').textContent = state.batteryKw >= 0 ? 'charging' : 'discharging';
+    $('kw-solar').textContent = state.solarKw.toFixed(2)+' kW';
+    $('kw-home').textContent  = state.solarKw.toFixed(2)+' kW';
+    // PV-only system: repurpose the two right-hand nodes for energy figures
+    $('kw-batt').textContent  = state.eToday.toFixed(1)+' kWh';
+    $('kw-grid').textContent  = Math.round(state.eTotal)+' kWh';
+    // Battery card repurposed as "Today" summary
+    if ($('batt-soc'))   $('batt-soc').textContent = state.eToday.toFixed(1);
+    if ($('batt-bar'))   $('batt-bar').style.width = Math.min(100, (state.solarKw/state.nominalKw*100||0))+'%';
+    if ($('batt-backup'))$('batt-backup').textContent = state.solarKw.toFixed(2)+' kW now';
+    if ($('batt-health'))$('batt-health').textContent = Math.round(state.eMonth);
+    if ($('batt-cycles'))$('batt-cycles').textContent = Math.round(state.eTotal);
+    if ($('batt-mode'))  $('batt-mode').textContent = state.solarKw > 0.05 ? 'generating' : 'idle';
     $('saved-today').textContent = fmt.format(Math.round(state.savedToday));
     $('saved-month').textContent = fmt.format(Math.round(state.savedMonth));
-    $('self-suff').textContent = Math.round(state.selfSufficiency);
-    $('grid-share').textContent = Math.max(0, 100 - Math.round(state.selfSufficiency));
+    if ($('self-suff'))  $('self-suff').textContent = state.eToday.toFixed(1);
+    if ($('grid-share')) $('grid-share').textContent = Math.round(state.eMonth);
     renderGeneration();
     var secs = Math.max(0, Math.round((Date.now() - state.lastUpdate)/1000));
     $('flow-updated').textContent = secs < 5 ? 'updated just now' : 'updated ' + secs + 's ago';
@@ -358,19 +366,15 @@
     $('status-text').textContent = mode==='live' ? 'Live' : mode==='off' ? 'Reconnecting…' : 'Demo · simulated';
   }
 
-  /* ---- Map the backend JSON into state. Adjust keys to match your proxy. ---- */
+  /* ---- Map the backend JSON into state ---- */
   function readState(json){
-    if (typeof json.solarKw==='number')        state.solarKw = json.solarKw;
-    if (typeof json.homeKw==='number')          state.homeKw = json.homeKw;
-    if (typeof json.batteryKw==='number')     state.batteryKw = json.batteryKw;
-    if (typeof json.gridKw==='number')            state.gridKw = json.gridKw;
-    if (typeof json.soc==='number')                  state.soc = json.soc;
-    if (typeof json.batteryHealth==='number') state.batteryHealth = json.batteryHealth;
-    if (typeof json.cycles==='number')            state.cycles = json.cycles;
-    if (typeof json.backup==='string')            state.backup = json.backup;
-    if (typeof json.savedToday==='number')    state.savedToday = json.savedToday;
-    if (typeof json.savedMonth==='number')    state.savedMonth = json.savedMonth;
-    if (typeof json.selfSufficiency==='number') state.selfSufficiency = json.selfSufficiency;
+    if (typeof json.solarKw==='number')   state.solarKw = json.solarKw;
+    if (typeof json.eToday==='number')     state.eToday  = json.eToday;
+    if (typeof json.eMonth==='number')     state.eMonth  = json.eMonth;
+    if (typeof json.eTotal==='number')     state.eTotal  = json.eTotal;
+    if (typeof json.savedToday==='number') state.savedToday = json.savedToday;
+    if (typeof json.savedMonth==='number') state.savedMonth = json.savedMonth;
+    if (typeof json.nominalKw==='number' && json.nominalKw>0) state.nominalKw = json.nominalKw;
     if (Array.isArray(json.daily) && json.daily.length) state.daily = json.daily;
     state.lastUpdate = Date.now();
   }
