@@ -230,7 +230,7 @@
 
   <section class="block">
     <div class="card pad">
-      <div class="head"><h3 class="h">Daily generation · this month</h3><span class="muted">6.0 kWp</span></div>
+      <div class="head"><h3 class="h">Daily generation · this month</h3><span class="muted">8.0 kW</span></div>
       <div class="grid-3" style="margin-bottom:18px">
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Total</p><div class="kmed num"><span id="gen-total">757</span> <small>kWh</small></div></div></div>
         <div class="card" style="background:var(--surface-2);border:none"><div class="pad"><p class="klabel">Daily average</p><div class="kmed num"><span id="gen-avg">25.2</span> <small>kWh</small></div></div></div>
@@ -244,13 +244,12 @@
   <section class="block">
     <div class="card pad">
       <div class="head"><h3 class="h">Your settings</h3></div>
-      <div class="field"><label for="tariff">Electricity tariff</label><input type="text" id="tariff" value="6.50" inputmode="decimal" /><span class="muted">INR / kWh</span></div>
-      <div class="field"><label for="reserve">Battery reserve</label><input type="range" id="reserve" min="10" max="50" value="20" step="5" /><span class="rngout num" id="reserve-out">20%</span></div>
-      <div class="btnrow"><button class="btn" type="button">Smart scheduling</button><button class="btn" type="button">Winter mode</button><button class="btn" type="button">Download report</button></div>
+      <div class="field"><label for="tariff">Export rate</label><input type="text" id="tariff" value="3.15" inputmode="decimal" /><span class="muted">INR / kWh (KSEB buy-back)</span></div>
+      <div class="btnrow"><button class="btn" type="button" onclick="location.reload()">Refresh now</button><button class="btn" type="button">Download report</button></div>
     </div>
   </section>
 
-  <footer id="footnote">Solera · running in demo mode with simulated data. Set a data endpoint to go live.</footer>
+  <footer id="footnote">Solera · live data from your Growatt MOD 8000TL3-X via secure proxy · refreshes every 2 min</footer>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -288,7 +287,7 @@
     solarKw:0, eToday:0, eMonth:0, eTotal:0, nominalKw:8,
     savedToday:0, savedMonth:0,
     bankedUnits:0, exported:0, imported:0, billAmount:0, billMonth:"",
-    daily:demoDaily.slice(), tariff:6.50, lastUpdate:Date.now()
+    daily:demoDaily.slice(), tariff:3.15, lastUpdate:Date.now()
   };
 
   /* ---- Settings inputs ---- */
@@ -349,7 +348,7 @@
     // Battery card repurposed as "Today" summary
     if ($('batt-soc'))   $('batt-soc').textContent = state.eToday.toFixed(1);
     if ($('batt-bar'))   $('batt-bar').style.width = Math.min(100, (state.solarKw/state.nominalKw*100||0))+'%';
-    if ($('batt-backup'))$('batt-backup').textContent = state.solarKw.toFixed(2)+' kW now';
+    if ($('batt-backup'))$('batt-backup').textContent = state.solarKw.toFixed(2)+' kW';
     if ($('batt-health'))$('batt-health').textContent = Math.round(state.eMonth);
     if ($('batt-cycles'))$('batt-cycles').textContent = Math.round(state.eTotal);
     if ($('batt-mode'))  $('batt-mode').textContent = state.solarKw > 0.05 ? 'generating' : 'idle';
