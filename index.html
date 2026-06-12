@@ -147,7 +147,7 @@
 
 <main class="wrap">
   <section class="hero">
-    <p class="hello">Good afternoon, Joshy Antony</p>
+    <p class="hello" id="hello">Good afternoon, Joshy Antony</p>
     <div class="hero-grid">
       <div class="card lead">
         <p class="klabel">Value of solar this month</p>
@@ -290,6 +290,19 @@
     daily:demoDaily.slice(), tariff:3.15, lastUpdate:Date.now()
   };
 
+  /* ---- Time-based greeting ---- */
+  function setGreeting(){
+    var h = new Date().getHours();
+    var g = "Good evening";
+    if (h >= 5 && h < 12) g = "Good morning";
+    else if (h >= 12 && h < 17) g = "Good afternoon";
+    else if (h >= 17 && h < 21) g = "Good evening";
+    else g = "Good night";
+    var el = $('hello');
+    if (el) el.textContent = g + ", Joshy Antony";
+  }
+  setGreeting();
+
   /* ---- Settings inputs ---- */
   var tariffEl = $('tariff');
   if (tariffEl) tariffEl.addEventListener('input', function(){
@@ -426,7 +439,7 @@
     $('footnote').textContent = 'Solera · demo mode with simulated data, refreshing every few seconds. Set DATA_ENDPOINT in the code to show your real system.';
     demoTick();
     setInterval(demoTick, 3000);
-    setInterval(function(){ render(); }, 1000);
+    setInterval(function(){ render(); setGreeting(); }, 1000);
   }
 })();
 </script>
